@@ -1,14 +1,14 @@
-# IOT-TermProject
+## IOT-TermProject
 
 
-# 1. 개요
+### 1. 개요
 
 로봇이 위에 초밥을 싣고 라인을 따라 움직이면서 손님에게 배달하는 서비스입니다.
 
 
 
 
-# 2. 구성
+### 2. 구성
 
 - EV3 광센서, 레고 초음파 센서, 라인 트레이서
 
@@ -21,7 +21,7 @@
 
 
 
-# 3. 동작 
+### 3. 동작 
 
 1. 초밥을 얹은 로봇이 라인을 따라 원을 계속 회전
 
@@ -33,58 +33,58 @@
 
 5. 요리사가 빈 로봇 위에 초밥을 다시 세팅-> 예외처리
 
-# 변수선언
+### 변수선언
 
-#define R_MOTOR_PORT	0	//오른모터 포트
-#define L_MOTOR_PORT	3	//왼모터포트
+>#define R_MOTOR_PORT	0	//오른모터 포트
+>#define L_MOTOR_PORT	3	//왼모터포트
 
-#define LINETRACER_PORT	0	//라인트레이서 포트
-#define LIGHT_SENSOR_PORT	1	//광센서 포트
-#define SOUND_SENSOR_PORT	3	//피치센서 포 트
-
-
-#define DEFAULT_SPEED	300//기본 모터 속도
-
-#define STATE_NORMAL	0	//주문 전
-#define STATE_ORDERED	1	//주문 들어왔음
+>#define LINETRACER_PORT	0	//라인트레이서 포트
+>#define LIGHT_SENSOR_PORT	1	//광센서 포트
+>#define SOUND_SENSOR_PORT	3	//피치센서 포 트
 
 
+>#define DEFAULT_SPEED	300//기본 모터 속도
 
-#define STATE_WRONG		2	//로봇이 목표지점에서 멀어질때
-#define STATE_GOAL		3	//로봇이 목표지점에 도달했을때
-
-
-#define EMPTY 0			//초밥 없음
-#define FILLED 1		//초밥 있음
+>#define STATE_NORMAL	0	//주문 전
+>#define STATE_ORDERED	1	//주문 들어왔음
 
 
 
-ev3_color_t ev3_color;	// 현재로봇위치
-color_mode_t sensor_mode = COL_COLOR; //컬러센서 모드
-#define MAC_ARRAY_SIZE	5 // 컬러센서 모드
-
-#define LOCK	1
-#define UNLOCK	0
-
-#define PLAY_TIME	60 // 경기시간
-#define TIME_OUT	700//회전함수 타임아웃
+>#define STATE_WRONG		2	//로봇이 목표지점에서 멀어질때
+>#define STATE_GOAL		3	//로봇이 목표지점에 도달했을때
 
 
-int flag = LOCK;
-int plate;			//초밥 그릇 상태
-int signal;			//신호값
-int table_num;		//테이블 번호  2 , 3 , 4
-int current_state = STATE_NORMAL; //= STATE_CORRECT;
-int current_color = WHITE;
-int previous_color = WHITE;
-
-int Gain1 = 5;	// 회전 함수 제어 계수 (각도)
-int Gain2 = 7;	// 회전 함수 제어 계수 (속도)
-
-int linearr[8]; // 라인트레이서 배열
+>#define EMPTY 0			//초밥 없음
+>#define FILLED 1		//초밥 있음
 
 
-# Usermain
+
+>ev3_color_t ev3_color;	// 현재로봇위치
+>color_mode_t sensor_mode = COL_COLOR; //컬러센서 모드
+>#define MAC_ARRAY_SIZE	5 // 컬러센서 모드
+
+>#define LOCK	1
+>#define UNLOCK	0
+
+>#define PLAY_TIME	60 // 경기시간
+>#define TIME_OUT	700//회전함수 타임아웃
+
+
+>int flag = LOCK;
+>int plate;			//초밥 그릇 상태
+>int signal;			//신호값
+>int table_num;		//테이블 번호  2 , 3 , 4
+>int current_state = STATE_NORMAL; //= STATE_CORRECT;
+>int current_color = WHITE;
+>int previous_color = WHITE;
+
+>int Gain1 = 5;	// 회전 함수 제어 계수 (각도)
+>int Gain2 = 7;	// 회전 함수 제어 계수 (속도)
+
+>int linearr[8]; // 라인트레이서 배열
+
+
+### Usermain
 
 int r;
 
