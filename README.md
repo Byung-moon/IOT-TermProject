@@ -19,7 +19,7 @@
 
 - Bluetooth 모듈 1개
 
-
+![servingRobot](images/servingRobot.PNG "servingRobot")
 
 
 ### 3. 동작 
