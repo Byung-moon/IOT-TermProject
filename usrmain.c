@@ -76,54 +76,57 @@
 /* -------------------------------------------------------------------------
 	Global variables
  ------------------------------------------------------------------------- */
-#define R_MOTOR_PORT	0	//¿À¸¥¸ğÅÍ Æ÷Æ®
-#define L_MOTOR_PORT	3	//¿Ş¸ğÅÍÆ÷Æ®
+#define R_MOTOR_PORT		0	//ì˜¤ë¥¸ëª¨í„° í¬íŠ¸
+#define L_MOTOR_PORT		3	//ì™¼ëª¨í„°í¬íŠ¸
 
-#define LINETRACER_PORT	0	//¶óÀÎÆ®·¹ÀÌ¼­ Æ÷Æ®
-#define LIGHT_SENSOR_PORT	1	//±¤¼¾¼­ Æ÷Æ®
-#define SOUND_SENSOR_PORT	3	//ÇÇÄ¡¼¾¼­ Æ÷ Æ®
-
-
-#define DEFAULT_SPEED	300//±âº» ¸ğÅÍ ¼Óµµ
-
-#define STATE_NORMAL	0	//ÁÖ¹® Àü
-#define STATE_ORDERED	1	//ÁÖ¹® µé¾î¿ÔÀ½
+#define LINETRACER_PORT		0	//ë¼ì¸íŠ¸ë ˆì´ì„œ í¬íŠ¸
+#define LIGHT_SENSOR_PORT	1	//ê´‘ì„¼ì„œ í¬íŠ¸
+#define SOUND_SENSOR_PORT	3	//í”¼ì¹˜ì„¼ì„œ í¬ íŠ¸
 
 
+#define DEFAULT_SPEED		300//ê¸°ë³¸ ëª¨í„° ì†ë„
 
-#define STATE_WRONG		2	//·Îº¿ÀÌ ¸ñÇ¥ÁöÁ¡¿¡¼­ ¸Ö¾îÁú¶§
-#define STATE_GOAL		3	//·Îº¿ÀÌ ¸ñÇ¥ÁöÁ¡¿¡ µµ´ŞÇßÀ»¶§
-
-
-#define EMPTY 0			//ÃÊ¹ä ¾øÀ½
-#define FILLED 1		//ÃÊ¹ä ÀÖÀ½
+#define STATE_NORMAL		0	//ì£¼ë¬¸ ì „
+#define STATE_ORDERED		1	//ì£¼ë¬¸ ë“¤ì–´ì™”ìŒ
 
 
 
-ev3_color_t ev3_color;	// ÇöÀç·Îº¿À§Ä¡
-color_mode_t sensor_mode = COL_COLOR; //ÄÃ·¯¼¾¼­ ¸ğµå
-#define MAC_ARRAY_SIZE	5 // ÄÃ·¯¼¾¼­ ¸ğµå
+#define STATE_WRONG		2	//ë¡œë´‡ì´ ëª©í‘œì§€ì ì—ì„œ ë©€ì–´ì§ˆë•Œ
+#define STATE_GOAL		3	//ë¡œë´‡ì´ ëª©í‘œì§€ì ì— ë„ë‹¬í–ˆì„ë•Œ
+
+
+#define EMPTY 			0	//ì´ˆë°¥ ì—†ìŒ
+#define FILLED 			1	//ì´ˆë°¥ ìˆìŒ
+
+
+
+ev3_color_t ev3_color;	// í˜„ì¬ë¡œë´‡ìœ„ì¹˜
+color_mode_t sensor_mode = COL_COLOR; //ì»¬ëŸ¬ì„¼ì„œ ëª¨ë“œ
+
+#define MAC_ARRAY_SIZE	5 // ì»¬ëŸ¬ì„¼ì„œ ëª¨ë“œ
 
 #define LOCK	1
 #define UNLOCK	0
 
-#define PLAY_TIME	60 // °æ±â½Ã°£
-#define TIME_OUT	700//È¸ÀüÇÔ¼ö Å¸ÀÓ¾Æ¿ô
+#define PLAY_TIME	60 // ê²½ê¸°ì‹œê°„
+#define TIME_OUT	700//íšŒì „í•¨ìˆ˜ íƒ€ì„ì•„ì›ƒ
 
 
 int flag = LOCK;
-int plate;			//ÃÊ¹ä ±×¸© »óÅÂ
-int signal;			//½ÅÈ£°ª
-int table_num;		//Å×ÀÌºí ¹øÈ£  2 , 3 , 4
+int plate;		//ì´ˆë°¥ ê·¸ë¦‡ ìƒíƒœ
+int signal;		//ì‹ í˜¸ê°’
+int table_num;		//í…Œì´ë¸” ë²ˆí˜¸  2 , 3 , 4
 int current_state = STATE_NORMAL; //= STATE_CORRECT;
 int current_color = WHITE;
 int previous_color = WHITE;
 
-int Gain1 = 5;	// È¸Àü ÇÔ¼ö Á¦¾î °è¼ö (°¢µµ)
-int Gain2 = 7;	// È¸Àü ÇÔ¼ö Á¦¾î °è¼ö (¼Óµµ)
+int Gain1 = 5;	// íšŒì „ í•¨ìˆ˜ ì œì–´ ê³„ìˆ˜ (ê°ë„)
+int Gain2 = 7;	// íšŒì „ í•¨ìˆ˜ ì œì–´ ê³„ìˆ˜ (ì†ë„)
 
-int linearr[8]; // ¶óÀÎÆ®·¹ÀÌ¼­ ¹è¿­
-//-----------------------Blutooth Ãß°¡ÇÑ ±Û·Î¹ú º¯¼ö------------
+int linearr[8]; // ë¼ì¸íŠ¸ë ˆì´ì„œ ë°°ì—´
+
+
+//-----------------------Blutooth ì¶”ê°€í•œ ê¸€ë¡œë²Œ ë³€ìˆ˜------------
 uint8_t print_packet[DATA_SEND_BUFFER_SIZE] = {0,};
 //int motorset=0;
 
@@ -131,18 +134,18 @@ uint8_t print_packet[DATA_SEND_BUFFER_SIZE] = {0,};
 msgq_pt BT_user_event_queue;
 //Mutex for print_packe
 mutex_pt _g_mutex;
-
 //------------------------------------------------
+
 
 /* -------------------------------------------------------------------------
 	Prototypes
  ------------------------------------------------------------------------- */
-//ÅÂ½ºÅ©
+//í…ŒìŠ¤í¬
 void start_end_task(void);
 void move_robot_task(void);
 void check_state_task(void);
 
-//ÇÔ¼ö
+//í•¨ìˆ˜
 void waiting(void);
 void turn_right(int degree);
 void turn_left(int degree);
@@ -151,7 +154,7 @@ void go_forward(int speed);
 void go_forward_check(int speed, int table_num);
 void go_backward(int speed);
 
-//ÀÎÅÍ·´Æ® ·çÆ¾
+//ì¸í„°ëŸ½íŠ¸ ë£¨í‹´
 void sw1_isr(void);
 void sw2_isr(void);
 
@@ -166,18 +169,18 @@ int usrmain(int argc, char * argv[]) {
 	printf("exe_ubinos_test (build time: %s %s)\n\r", __TIME__, __DATE__);
 	printf("================================================================================\n\r");
 
-	// ÃÊ±âÈ­
+	// ì´ˆê¸°í™”
 	motor_init();
 	//encoder_init();
-	sensor_init(EV3_LINE_FOLLOWER_SENSOR,0,NXT_DIGITAL_SENSOR_SONA,0); // ¶óÀÎÆ®·¹ÀÌ¼­, ÃÊÀ½ÆÄ ¼¾¼­ ÃÊ±âÈ­
-	ev3_sensor_init(LIGHT_SENSOR_PORT, sensor_mode); //±¤¼¾¼­ ÃÊ±âÈ­
+	sensor_init(EV3_LINE_FOLLOWER_SENSOR,0,NXT_DIGITAL_SENSOR_SONA,0); // ë¼ì¸íŠ¸ë ˆì´ì„œ, ì´ˆìŒíŒŒ ì„¼ì„œ ì´ˆê¸°í™”
+	ev3_sensor_init(LIGHT_SENSOR_PORT, sensor_mode); //ê´‘ì„¼ì„œ ì´ˆê¸°í™”
 	glcd_init();
 	//switch_init(sw1_isr, sw2_isr);
 
-	//¶óÀÎÆ®·¹ÀÌ¼­ ¸ğµå ¼³Á¤
+	//ë¼ì¸íŠ¸ë ˆì´ì„œ ëª¨ë“œ ì„¤ì •
 	modeSelectLine(1);
 
-	// ÅÂ½ºÅ© »ı¼º
+	// íƒœìŠ¤í¬ ìƒì„±
 	r = task_create(NULL, start_end_task, NULL, task_gethighestpriority(), 500, NULL);
 			if (0 != r) {
 				logme("fail at task_create\r\n");
@@ -204,20 +207,10 @@ int usrmain(int argc, char * argv[]) {
 	return 0;
 }
 
-
-
-// ÇÇÄ¡¼¾¼­ Ã¼Å©, °æ±â ½ÃÀÛ ÈÄ 1ºĞµÚ Á¤Áö, ·Îº¿ÀÇ ÃÊ±âÀ§Ä¡ ( ·¹º§0 )¿¡¼­ Á¤Áö
-
-void start_end_task(void) {
-	//flag = LOCK;
-	//waiting();
-
-	//bsp_busywaitms(10);
-	//turn_right(70);
-	//sensor_init(EV3_LINE_FOLLOWER_SENSOR,0,0,0);
-	//modeSelectLine(1);
-	//glcd_printf("go");
-	for(;;){
+void start_end_task(void) 
+{
+	for(;;)
+	{
 
 	go_forward(DEFAULT_SPEED);
 	//bsp_busywaitms(1);
@@ -227,164 +220,117 @@ void start_end_task(void) {
 }
 
 
-//·Îº¿ÀÇ ÇöÀç »óÅÂ¿¡ µû¸¥ ¿òÁ÷ÀÓ Á¤ÀÇ
+//ë¡œë´‡ì˜ í˜„ì¬ ìƒíƒœì— ë”°ë¥¸ ì›€ì§ì„ ì •ì˜
+void move_robot_task(void)
+{
+	while(1)
+	{
+		switch(current_state)
+		{
+			case STATE_NORMAL:
+				task_sleep(10);
+				break;
+			case STATE_ORDERED:
+				if(table_num == ev3_sensor_get(LIGHT_SENSOR_PORT))
+				{
+					motor_set(R_MOTOR_PORT, 0);
+					motor_set(L_MOTOR_PORT, 0);
+				}
+				break;
+				
+			case STATE_GOAL:
+				glcdGotoChar(0,0);
+				glcd_printf("Val : %d \r\n", ev3_sensor_get(0));
+			
+				bsp_busywaitms(3);
+				break;
 
-void move_robot_task(void){
-
-
-
-	while(1){
-		switch(current_state){
-	case STATE_NORMAL:
-		//glcdGotoChar(4,2);
-		//glcd_printf("GO");
-		//go_forward(DEFAULT_SPEED);
-
-		//bsp_busywaitms(20);
-		task_sleep(10);
-
-		break;
-	case STATE_ORDERED:
-		//glcdGotoChar(2,2);
-		//glcd_printf("stop");
-		if(table_num == ev3_sensor_get(LIGHT_SENSOR_PORT)){
-		motor_set(R_MOTOR_PORT, 0);
-		motor_set(L_MOTOR_PORT, 0);
+			default:
+				glcdGotoChar(0,0);
+				glcd_printf("Val : %d \r\n", ev3_sensor_get(0));
+				go_forward(DEFAULT_SPEED);
+				bsp_busywaitms(1);
+				break;
 		}
-		break;
-	case STATE_GOAL:
-		glcdGotoChar(0,0);
-		glcd_printf("Val : %d \r\n", ev3_sensor_get(0));
-		//go_forward(DEFAULT_SPEED);
-		bsp_busywaitms(3);
-
-		//go_backward(DEFAULT_SPEED);
-		bsp_busywaitms(1);
-		break;
-
-	default:
-		glcdGotoChar(0,0);
-		glcd_printf("Val : %d \r\n", ev3_sensor_get(0));
-		go_forward(DEFAULT_SPEED);
-		bsp_busywaitms(1);
-		break;
-		}
-	task_sleep(2);
+		task_sleep(2);
 	}
 }
 
-//±¤¼¾¼­ °ªÀ» ÀĞ¾îµé¿© ÇöÀç ·Îº¿ À§Ä¡ ¹× »óÅÂ Ã¼Å©
+//ê´‘ì„¼ì„œ ê°’ì„ ì½ì–´ë“¤ì—¬ í˜„ì¬ ë¡œë´‡ ìœ„ì¹˜ ë° ìƒíƒœ ì²´í¬
 
-void check_state_task(void){
-
+void check_state_task(void)
+{
 	int i, j, cnt, state = 0;
-
 	int r =0;
-		module_id_st BT_ID;
-		BT_Evt_t BT_usr_msgRXBuffer = { 0, };
+	module_id_st BT_ID;
+	BT_Evt_t BT_usr_msgRXBuffer = { 0, };
 
-		//set BT_module_ID
-		BT_ID.module_id[0] = BLE_MODULE_ID_0;
-		BT_ID.module_id[1] = BLE_MODULE_ID_1;
-		BT_ID.module_id[2] = BLE_MODULE_ID_2;
-		BT_ID.module_id[3] = BLE_MODULE_ID_3;
+	//set BT_module_ID
+	BT_ID.module_id[0] = BLE_MODULE_ID_0;
+	BT_ID.module_id[1] = BLE_MODULE_ID_1;
+	BT_ID.module_id[2] = BLE_MODULE_ID_2;
+	BT_ID.module_id[3] = BLE_MODULE_ID_3;
 
-		task_sleep(200);
-		BT_INIT(INIT_ROLE_PERIPHERAL, BT_ID, BT_user_event_queue);
+	task_sleep(200);
+	BT_INIT(INIT_ROLE_PERIPHERAL, BT_ID, BT_user_event_queue);
 
-		BT_ADV_START();
+	BT_ADV_START();
 
-		for(;;){
-				r = msgq_receive(BT_user_event_queue, (unsigned char*) &BT_usr_msgRXBuffer);
-				if (0 != r){
-				logme ("fail at msgq_receive\r\n" ) ;
-				} else{
-				   switch (BT_usr_msgRXBuffer.status){
-				   case BT_EVT_PE_DATA_READ: {
-				   //motor setting
-				   mutex_lock(_g_mutex);
-				   signal = (int)((BT_usr_msgRXBuffer.msg[1] << 8) | (BT_usr_msgRXBuffer.msg[0]));
+	for(;;)
+	{
+		r = msgq_receive(BT_user_event_queue, (unsigned char*) &BT_usr_msgRXBuffer);
+		if (0 != r)
+		{
+			logme ("fail at msgq_receive\r\n" ) ;
+		} 
+		else
+		{
+		   switch (BT_usr_msgRXBuffer.status)
+		   {
+		   	case BT_EVT_PE_DATA_READ: 
+				   {   
+		  			mutex_lock(_g_mutex);
+		   			signal = (int)((BT_usr_msgRXBuffer.msg[1] << 8) | (BT_usr_msgRXBuffer.msg[0]));
 
-				   for (int i=0; i<20; i++ ){
-				  		      print_packet[i]=BT_usr_msgRXBuffer.msg[i];
-				  		   }
+		  			for (int i=0; i<20; i++)
+					{
+				      	print_packet[i]=BT_usr_msgRXBuffer.msg[i];
+				   	}
+					   mutex_unlock(_g_mutex);
+					   glcdGotoChar(2,2);
+					   glcd_printf("%d",signal); //signal ë³´ë“œì¶œë ¥
+					   table_num = signal; // í…Œì´ë¸” ë²ˆí˜¸ë¥¼ ë°›ìŒ
+					   current_state = STATE_ORDERED; // í˜„ì¬ ìƒíƒœ ë³€ê²½
+					   break;
 
-				  		   mutex_unlock(_g_mutex);
-				  		   glcdGotoChar(2,2);
-				  		   glcd_printf("%d",signal); //signal º¸µåÃâ·Â
-				  		   table_num = signal; // Å×ÀÌºí ¹øÈ£¸¦ ¹ŞÀ½
-				  		   current_state = STATE_ORDERED; // ÇöÀç »óÅÂ º¯°æ
-				  		   break;
-				  		   //send same msg
-				  		   //BT_DATA_SEND(INIT_ROLE_PERIPHERAL, print_packet);
-
-				  		   task_sleep(10);
-				  		   }
-				  		   break;
-
-				  		   case BT_EVT_DISCONNECTED:
-				  			   break;
-
-				  			    case BT_EVT_CONNECTED:
-
-				  			       break;
-				  			    }
-				  		}
-				  	}
-
-	/*while(1){
-		for(i = 0; i < MAC_ARRAY_SIZE; i++){
-			color_array[i] = ev3_sensor_get(0);
-			task_sleep(5);
-			}
-
-		for(i = 0; i < (MAC_ARRAY_SIZE - 1); i++){
-			cnt = 1;
-				for(j = i + 1; j < MAC_ARRAY_SIZE; j++){
-					if(color_array[i]==color_array[j])
-						cnt++;
-					}
-			if(cnt > (MAC_ARRAY_SIZE / 2)){
-				current_color = color_array[i];
-				break;
-				}
-			}
-
-	state = current_color - previous_color;
-	switch(current_color){
-		case WHITE:
-			current_state = STATE_NORMAL;
-			break;
-		case YELLOW:
-		case GREEN:
-		case BLUE:
-		case RED:
-			current_state = (state <= 0) ? STATE_CORRECT : STATE_WRONG;
-			break;
-		case BLACK:
-			current_state = STATE_GOAL;
-			break;
-		default:
-			break;
-			}
-	previous_color = current_color;
-	task_sleep(20);
-	}*/
+				   	   task_sleep(10);
+				   }
+				   break;
+			case BT_EVT_DISCONNECTED:
+				   break;
+			case BT_EVT_CONNECTED:
+				   break;
+		    }
+		}
+	}
 }
 
 
-
-
-//·Îº¿À» ¾ÕÀ¸·Î ¿òÁ÷ÀÓ
-void go_forward(int speed){
-	for(;;){
-	if(!((current_state == STATE_ORDERED) && (table_num == ev3_sensor_get(LIGHT_SENSOR_PORT)))){
+//ë¡œë´‡ì„ ì•ìœ¼ë¡œ ì›€ì§ì„
+void go_forward(int speed)
+{
+	for(;;)
+	{
+	if(!((current_state == STATE_ORDERED) && (table_num == ev3_sensor_get(LIGHT_SENSOR_PORT))))
+	{
 		line_get(LINETRACER_PORT,linearr);
-		if(abs(linearr[0])>=22){
-			motor_set(R_MOTOR_PORT, 0.3*speed - 1.5*(linearr[0]-128));
+		if(abs(linearr[0])>=22)
+		{
+			motor_set(R_MOTOR_PORT, 0.3*speed - 1.5*(linearr[0]-128));	// ë¼ì¸íŠ¸ë ˆì´ì„œì˜ ê°ì§€ëœ ê°’, êµ´ê³¡ì— ë”°ë¼ ëª¨í„°ì˜ ì†ë„ ì¡°ì ˆ
 			motor_set(L_MOTOR_PORT, 0.3*speed + 1.5*(linearr[0]-128));
 		}
-		else if(abs(linearr[0])<22){
+		else if(abs(linearr[0])<22)
+		{
 			motor_set(R_MOTOR_PORT, 1.3*speed - 0.25*(linearr[0]-128));
 			motor_set(L_MOTOR_PORT, 1.3*speed + 0.25*(linearr[0]-128));
 		}
@@ -398,14 +344,14 @@ void go_forward_check(int speed, int table_num){
 }
 
 
-// ¹öÆ° 1À» ´©¸£±â Àü±îÁö ´ë±âÇÑ´Ù
+// ë²„íŠ¼ 1ì„ ëˆ„ë¥´ê¸° ì „ê¹Œì§€ ëŒ€ê¸°í•œë‹¤
 void waiting(void){
 	while(flag == LOCK){
 	}
 flag = LOCK;
 }
 
-//¹öÆ° 1°ú 2ÀÇ ÀÎÅÍ·´Æ® ¼­ºñ½º ·çÆ¾
+//ë²„íŠ¼ 1ê³¼ 2ì˜ ì¸í„°ëŸ½íŠ¸ ì„œë¹„ìŠ¤ ë£¨í‹´
 void sw1_isr(void){
 	flag = UNLOCK;
 }
@@ -415,9 +361,7 @@ void sw2_isr(void){
 
 
 
-
-
-//½º¸ğ·Îº¿À» ¿À¸¥ÂÊÀ¸·Î ÀÔ·ÂÇÑ °¢µµ¸¸Å­ È¸Àü
+//ë¡œë´‡ì„ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì…ë ¥í•œ ê°ë„ë§Œí¼ íšŒì „
 void turn_right(int degree){
 	int speed = 300;
 	int diff_degree = 0;
@@ -436,9 +380,7 @@ void turn_right(int degree){
 	}while((diff_degree != 0) && (timeout !=0));
 }
 
-
-
-//½º¸ğ·Îº¿À» ¿ŞÂÊÀ¸·Î ÀÔ·ÂÇÑ °¢µµ¸¸Å­ È¸Àü
+//ë¡œë´‡ì„ ì™¼ìª½ìœ¼ë¡œ ì…ë ¥í•œ ê°ë„ë§Œí¼ íšŒì „
 void turn_left(int degree){
 	int speed = 0;
 	int diff_degree = 0;
