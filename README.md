@@ -47,12 +47,14 @@
 #### 기본 값 세팅 변수
 ```
 #define DEFAULT_SPEED	300	//기본 모터 속도
-int Gain1 = 5;	// 회전 함수 제어 계수 (각도)
-int Gain2 = 7;	// 회전 함수 제어 계수 (속도)
 #define PLAY_TIME	60 // 경기시간
 #define TIME_OUT	700//회전함수 타임아웃
 #define STATE_NORMAL	0	//주문 전
 #define STATE_ORDERED	1	//주문 들어왔음
+
+int Gain1 = 5;	// 회전 함수 제어 계수 (각도)
+int Gain2 = 7;	// 회전 함수 제어 계수 (속도)
+
 color_mode_t sensor_mode = COL_COLOR; //컬러센서 모드
 ```
 
