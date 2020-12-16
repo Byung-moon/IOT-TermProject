@@ -5,7 +5,7 @@
 
 로봇이 위에 초밥을 싣고 라인을 따라 움직이면서 손님에게 배달하는 서비스입니다.
 
-![guideline](images/guideline.png "guideline")
+![guideline](images/guideline.PNG "guideline")
 
 
 
